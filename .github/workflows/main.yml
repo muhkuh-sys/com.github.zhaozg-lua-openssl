@@ -53,7 +53,7 @@ jobs:
           os: ubuntu-latest
     steps:
     - name: Add exception for unsafe Git ownserships.
-      run: git config --global --add safe.directory /workspace
+      run: id
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
       with:
