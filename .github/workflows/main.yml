@@ -52,6 +52,8 @@ jobs:
           cpu-architecture: riscv64
           os: ubuntu-latest
     steps:
+    - name: Add exception for unsafe Git ownserships.
+      run: git config --global --add safe.directory /workspace
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
       with:
