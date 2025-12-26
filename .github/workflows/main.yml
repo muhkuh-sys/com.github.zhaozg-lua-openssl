@@ -52,8 +52,8 @@ jobs:
           cpu-architecture: riscv64
           os: ubuntu-latest
     steps:
-    - name: Add exception for unsafe Git ownserships.
-      run: id
+    - name: Set user and group to root for all files.
+      run: chown -R root:root ${PWD}
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
       with:
