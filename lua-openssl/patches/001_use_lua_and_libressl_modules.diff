@@ -1,0 +1,34 @@
+diff -uNr lua-openssl/CMakeLists.txt lua-openssl_patched/CMakeLists.txt
+--- lua-openssl/CMakeLists.txt	2025-12-21 13:16:11.000000000 +0100
++++ lua-openssl_patched/CMakeLists.txt	2025-12-24 16:01:33.540455121 +0100
+@@ -14,9 +14,10 @@
+ 
+ find_package(LuaJIT)
+ if(NOT LUAJIT_FOUND)
+-  find_package(Lua REQUIRED)
++  find_package(lua5.4 CONFIG REQUIRED)
++  GET_TARGET_PROPERTY(LUA_INCLUDE_DIR org.lua.lua::lua5.4 INTERFACE_INCLUDE_DIRECTORIES)
+ endif()
+-find_package(OpenSSL REQUIRED)
++find_package(LibreSSL REQUIRED)
+ 
+ set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+ set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+@@ -78,14 +79,14 @@
+   src/xstore.c)
+ 
+ target_include_directories(
+-  lua-openssl PUBLIC ${OPENSSL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} deps
++  lua-openssl PUBLIC ${LUA_INCLUDE_DIR} deps
+                      deps/lua-compat/c-api deps/auxiliar)
+ 
+-target_link_libraries(lua-openssl PUBLIC ${OPENSSL_LIBRARIES} ${EXTRA_LIBS}
++target_link_libraries(lua-openssl PUBLIC LibreSSL::Crypto LibreSSL::SSL LibreSSL::TLS ${EXTRA_LIBS}
+                                          Threads::Threads)
+ 
+ if(BUILD_LINK_LUA_LIBRARIES)
+-  target_link_libraries(lua-openssl PUBLIC ${LUA_LIBRARIES})
++  target_link_libraries(lua-openssl PUBLIC lua5.4)
+   if(UNIX)
+     target_link_options(lua-openssl PUBLIC -Wl,--no-undefined)
+   endif()

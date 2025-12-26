@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jonchki-artifact version="1.0">
+	<info group="com.github.zhaozg"
+	      module="lua-openssl"
+	      artifact="lua5.4-lua-openssl"
+	      version="@PROJECT_VERSION@"
+	      vcs-id="@PROJECT_VERSION_VCS@"
+	      extension="tar.xz"
+	      platform="@JONCHKI_PLATFORM@">
+		<license name="MIT"/>
+		<author name="zhaozg" url="https://www.libressl.org/" />
+		<description>
+			lua-openssl toolkit - A free, MIT-licensed OpenSSL binding for Lua.
+		</description>
+	</info>
+	<dependencies>
+		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.4"/>
+		<build-dependency group="org.libressl" module="libressl" artifact="libressl" version="4.2"/>
+	</dependencies>
+	<actions>
+		<!-- Jonchki is only used to install the build dependencies. Packing the artifact is done with CMake. -->
+		<action name="pack">
+		  return true
+		</action>
+	</actions>
+</jonchki-artifact>

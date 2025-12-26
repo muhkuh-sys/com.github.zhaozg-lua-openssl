@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dependency-log>
+	<dependencies>
+		<dependency group="com.github.zhaozg" module="lua-openssl" artifact="lua5.4-lua-openssl" version="0.10.2.1"/>
+		<dependency group="org.libressl" module="libressl" artifact="libressl" version="4.2.1.1"/>
+		<dependency group="org.lua" module="lua" artifact="lua" version="5.4.8.1"/>
+	</dependencies>
+	<build-dependencies>
+	</build-dependencies>
+</dependency-log>
