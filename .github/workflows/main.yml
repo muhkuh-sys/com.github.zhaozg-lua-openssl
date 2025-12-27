@@ -52,8 +52,6 @@ jobs:
           cpu-architecture: riscv64
           os: ubuntu-latest
     steps:
-    - name: Set user and group to root for all files.
-      run: chown -R root:root ${PWD}
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
       with:
@@ -65,8 +63,9 @@ jobs:
     - name: Run build in container
       run: |
         docker run --rm \
-          -v "${PWD}:/workspace" \
-          -w /workspace \
+          --env VCS_GIT_DESCRIBE_OUTPUT=$(git describe --abbrev=12 --always --dirty=+) \
+          --volume "${PWD}:/workspace" \
+          --workdir /workspace \
           ${{ matrix.platform.image }} \
           ./build_artifact.py \
             ${{ matrix.platform.distribution-id }} \
